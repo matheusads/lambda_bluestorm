@@ -1,62 +1,61 @@
 {
-  "body": "{\"message\": \"hello world\"}",
-  "resource": "/{proxy+}",
-  "path": "/path/to/resource",
-  "httpMethod": "POST",
-  "isBase64Encoded": false,
-  "queryStringParameters": {
-    "foo": "bar"
-  },
-  "pathParameters": {
-    "proxy": "/path/to/resource"
-  },
-  "stageVariables": {
-    "baz": "qux"
-  },
-  "headers": {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Encoding": "gzip, deflate, sdch",
-    "Accept-Language": "en-US,en;q=0.8",
-    "Cache-Control": "max-age=0",
-    "CloudFront-Forwarded-Proto": "https",
-    "CloudFront-Is-Desktop-Viewer": "true",
-    "CloudFront-Is-Mobile-Viewer": "false",
-    "CloudFront-Is-SmartTV-Viewer": "false",
-    "CloudFront-Is-Tablet-Viewer": "false",
-    "CloudFront-Viewer-Country": "US",
-    "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
-    "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Custom User Agent String",
-    "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
-    "X-Amz-Cf-Id": "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==",
-    "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
-    "X-Forwarded-Port": "443",
-    "X-Forwarded-Proto": "https"
-  },
-  "requestContext": {
-    "accountId": "123456789012",
-    "resourceId": "123456",
-    "stage": "prod",
-    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
-    "requestTime": "09/Apr/2015:12:34:56 +0000",
-    "requestTimeEpoch": 1428582896000,
-    "identity": {
-      "cognitoIdentityPoolId": null,
-      "accountId": null,
-      "cognitoIdentityId": null,
-      "caller": null,
-      "accessKey": null,
-      "sourceIp": "127.0.0.1",
-      "cognitoAuthenticationType": null,
-      "cognitoAuthenticationProvider": null,
-      "userArn": null,
-      "userAgent": "Custom User Agent String",
-      "user": null
-    },
-    "path": "/prod/path/to/resource",
-    "resourcePath": "/{proxy+}",
-    "httpMethod": "POST",
-    "apiId": "1234567890",
-    "protocol": "HTTP/1.1"
-  }
+	"resource": "/medication",
+	"path": "/medication",
+	"httpMethod": "GET",
+	"headers": {
+		"Accept": "application/json, text/plain, */*",
+		"Accept-Encoding": "gzip, deflate, br",
+		"Accept-Language": "en-us",
+		"CloudFront-Forwarded-Proto": "https",
+		"CloudFront-Is-Desktop-Viewer": "false",
+		"CloudFront-Is-Mobile-Viewer": "true",
+		"CloudFront-Is-SmartTV-Viewer": "false",
+		"CloudFront-Is-Tablet-Viewer": "false",
+		"CloudFront-Viewer-Country": "US",
+		"Host": "",
+		"origin": "",
+		"Referer": "",
+		"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1",
+		"Via": "2.0 fake.cloudfront.net (CloudFront)"
+	},
+	"queryStringParameters": {
+		"name": "Ibuprofen",
+		"page": "1"
+	},
+	"pathParameters": null,
+	"stageVariables": null,
+	"requestContext": {
+		"resourceId": "fake",
+		"resourcePath": "/medication",
+		"httpMethod": "GET",
+		"extendedRequestId": "U2F6OH5uvHcFnUg=",
+		"requestTime": "23/Oct/2020:00:00:00 +0000",
+		"path": "/v1/medication",
+		"accountId": "123456789",
+		"protocol": "HTTP/1.1",
+		"stage": "v1",
+		"domainPrefix": "fake-api-gw",
+		"requestTimeEpoch": 1603424321320,
+		"requestId": "150e20c5-81ae-4f85-9d1c-a2ae2c189db4 ",
+		"identity": {
+			"cognitoIdentityPoolId": null,
+			"cognitoIdentityId": null,
+			"vpceId": null,
+			"principalOrgId": null,
+			"cognitoAuthenticationType": null,
+			"userArn": null,
+			"userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1",
+			"accountId": null,
+			"caller": null,
+			"sourceIp": "10.1.0.137",
+			"accessKey": null,
+			"vpcId": null,
+			"cognitoAuthenticationProvider": null,
+			"user": null
+		},
+		"domainName": "fakeurl.apigateway.com",
+		"apiId": "fake-api-gw"
+	},
+	"body": null,
+	"isBase64Encoded": false
 }
