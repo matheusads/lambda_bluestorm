@@ -1,5 +1,5 @@
 import json
-
+from collections import OrderedDict
 import pytest
 
 from hello_world import app
@@ -71,11 +71,22 @@ def apigw_event():
     }
 
 
-def test_lambda_handler(apigw_event):
-    expected = {'Medication': 'IBUPROFEN',
-                'Forms': [{'Form': '', 'Drug Name': '', 'Strength': ''}]
-                }
+@pytest.fixture()
+def lines():
+    return [OrderedDict([('ApplNo', '000004'), ('ProductNo', '004'), ('Form', 'SOLUTION/DROPS;OPHTHALMIC'), ('Strength', '1%'), ('ReferenceDrug', '0'), ('DrugName', 'PAREDRINE'), ('ActiveIngredient', 'HYDROXYAMPHETAMINE HYDROBROMIDE'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000159'), ('ProductNo', '001'), ('Form', 'TABLET;ORAL'), ('Strength', '500MG'), ('ReferenceDrug', '0'), ('DrugName', 'SULFAPYRIDINE'), ('ActiveIngredient', 'SULFAPYRIDINE'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '001'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '20,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'LIQUAEMIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '002'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '40,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'LIQUAEMIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '003'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '5,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'LIQUAEMIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '004'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '1,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'LIQUAEMIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '005'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '10,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'LIQUAEMIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '007'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '100 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'LIQUAEMIN LOCK FLUSH'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '008'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '1,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'HEPARIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '009'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '5,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'HEPARIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')]),
+            OrderedDict([('ApplNo', '000552'), ('ProductNo', '010'), ('Form', 'INJECTABLE;INJECTION'), ('Strength', '10,000 UNITS/ML'), ('ReferenceDrug', '0'), ('DrugName', 'HEPARIN SODIUM'), ('ActiveIngredient', 'HEPARIN SODIUM'), ('ReferenceStandard', '0')])]
 
+
+def test_lambda_handler(apigw_event):
     expected_medication = 'IBUPROFEN'
     expected_qty = 242
 
@@ -86,3 +97,10 @@ def test_lambda_handler(apigw_event):
     assert "message" in ret["body"]
     assert data["message"]["Medication"] == expected_medication
     assert len(data["message"]["Forms"]) == expected_qty
+
+
+def test_get_medication_info(lines):
+    medication = "HEPARIN SODIUM"
+    expected_lines_qty = 9
+    med_list = app.get_medication_info(medication, lines)
+    assert len(med_list) == expected_lines_qty
