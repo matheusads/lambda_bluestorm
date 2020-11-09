@@ -28,9 +28,7 @@ def lambda_handler(event, context):
     medication = event["queryStringParameters"]["name"].upper()
     medication_list = get_medication_info(medication, file)
 
-    medication_dict = {'Medication': medication,
-                       'Forms': []
-                       }
+    medication_dict = {'Medication': medication, 'Forms': []}
 
     for med in medication_list:
         response_dict = dict()
